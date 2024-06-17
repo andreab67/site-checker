@@ -9,17 +9,18 @@ Acquiring a passport for an Italian citizen in Denver involves regularly checkin
 
 gitlab-ce - running as self hosted with a build agent running on the same instance 
 
-AWS - t3.xlarge  4 cores - 16 ram 
-Azure - .....
+## AWS - t3.xlarge  4 cores - 16 ram 
+## Azure - .....
+## GCP
 
 https://www.python.org/downloads/
 
 
 # Software to install
 
-gitlab-ce  -     https://about.gitlab.com/install/
-docker-ce   -    https://docs.docker.com/engine/install/
-gitlab-runner   -   https://docs.gitlab.com/runner/install/
+## gitlab-ce  -     https://about.gitlab.com/install/
+## docker-ce   -    https://docs.docker.com/engine/install/
+## gitlab-runner   -   https://docs.gitlab.com/runner/install/
 
 # Kubernetes Cluster 
 
