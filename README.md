@@ -7,10 +7,8 @@ Acquiring a passport for an Italian citizen in Denver involves regularly checkin
 
 # the technology
 
-# gitlab-ce - running as self hosted with a build agent running on the same instance 
-
-# kaniko-project - https://github.com/GoogleContainerTools/kaniko
-
+## gitlab-ce 
+## kaniko-project - https://github.com/GoogleContainerTools/kaniko
 ## AWS - t3.xlarge  4 cores - 16 ram 
 ## Azure - .....
 ## GCP
