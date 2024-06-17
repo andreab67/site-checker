@@ -46,3 +46,4 @@ ToDo
 Create Terraform, CloudFormation, deployment scripts 
 Add Azure and Google Cloud instructions and suggested specs for instances / containers
 Create instuctions to deploy in Azure Container Apps and AWWS Fargate
+Detail more FluxCD deployment process and provide instrcutions on how to deploy and integrate
