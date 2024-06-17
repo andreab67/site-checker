@@ -50,5 +50,5 @@ Once bootstrapped you will need a kustomize file to syncronyze the repository si
 ### deployment scripts 
 ### Add Azure Specs 
 ### Add GCP Specs 
-### Create instuctions to deploy in Azure Container Apps and AWS Fargate
+### Create instructions to deploy in Azure Container Apps and AWS Fargate
 ### Detail more FluxCD deployment process and provide instructions on how to deploy and integrate
