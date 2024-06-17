@@ -3,7 +3,7 @@ FluxCD Integrated solution to check a web site and send notifications if changes
 
 # the problem
 
-Aquiring a passport for an italian citizen in Denver is a taks that needs something checking a web page for changes and sending an notification when a change happens.
+Acquiring a passport for an Italian citizen in Denver involves regularly checking a specific webpage for any updates or changes. This task requires setting up notifications so that when the webpage is altered or updated, you receive an immediate alert. This method ensures that you are always informed of the latest requirements, procedures, and processing times for passport applications without having to manually check the website continuously.
 
 # the technology
 
@@ -38,7 +38,7 @@ In case you want to integrate with FluxCD you will need a repository to bootstra
 
 https://fluxcd.io/flux/installation/bootstrap/github/
 
-Once bootstartpped you will need a kustomize file to syncronyze the repository site-checker and the Kubernetes cluster.
+Once bootstrapped you will need a kustomize file to syncronyze the repository site-checker and the Kubernetes cluster.
 
 
 ToDo
