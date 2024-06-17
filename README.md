@@ -5,7 +5,7 @@ FluxCD Integrated solution to check a web site and send notifications if changes
 
 Aquiring a passport for an italian citizen in Denver is a taks that needs something checking a web page for changes and sending an notification when a change happens.
 
-# the techonology
+# the technology
 
 gitlab-ce - running as self hosted with a build agent running on the same instance 
 
