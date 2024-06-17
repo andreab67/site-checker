@@ -1,5 +1,5 @@
 # site-checker
-FluxCD Integrated solution to check a web site and send notifications if changes
+Container solution to check a web site and send notifications if changes
 
 # the problem
 
