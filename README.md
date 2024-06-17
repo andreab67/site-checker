@@ -11,7 +11,7 @@ Acquiring a passport for an Italian citizen in Denver involves regularly checkin
 ## kaniko-project - https://github.com/GoogleContainerTools/kaniko
 ## AWS - Fargate - https://aws.amazon.com/fargate/
 ## Azure - ACA  - https://azure.microsoft.com/en-us/products/container-apps
-## GCP - Cloud Run - https://cloud.google.com/run?hl=en
+## Google Cloud Platform - Cloud Run - https://cloud.google.com/run?hl=en
 
 https://www.python.org/downloads/
 
