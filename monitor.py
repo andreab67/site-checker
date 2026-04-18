@@ -1,3 +1,5 @@
+"""Poll a website on a fixed interval and email a notification when its content changes."""
+
 import requests
 import hashlib
 import time

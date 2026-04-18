@@ -2,8 +2,8 @@
 FROM python:3.11-slim-bookworm AS base
 
 # Set up environment variables
-ENV WEBSITE_URL="The website address you would likle to check"
-ENV EMAIL_SENDER="the identity email that has permissions to send from teh solution you use ( I used AWS SES) hint DKIM"
+ENV WEBSITE_URL="The website address you would like to check"
+ENV EMAIL_SENDER="the identity email that has permissions to send from the solution you use ( I used AWS SES) hint DKIM"
 ENV EMAIL_RECEIVER1="first email that receives notifications when the site changes"
 ENV EMAIL_RECEIVER2="second email that receives notifications when the site changes"
 ENV SMTP_PORT="587"
@@ -17,9 +17,6 @@ WORKDIR /app
 # Copy the necessary files into the container
 COPY requirements.txt .
 COPY monitor.py .
-
-# Install htop
-# RUN apt-get install htop -y
 
 # Update system
 RUN apt update && apt dist-upgrade -y && apt install tzdata -y 
