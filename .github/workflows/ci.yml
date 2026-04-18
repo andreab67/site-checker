@@ -33,7 +33,7 @@ jobs:
       - name: Compile monitor.py
         run: python -m py_compile monitor.py
       - name: Placeholder test step
-        run: echo "TODO: replace with real pytest suite — currently a mock."
+        run: 'echo "TODO - replace with real pytest suite (currently a mock)."'
 
   docker-build:
     name: Docker build
