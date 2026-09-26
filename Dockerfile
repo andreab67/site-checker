@@ -1,31 +1,35 @@
-# Use a base image with necessary tools
 FROM python:3.11-slim-bookworm AS base
 
-# Set up environment variables
-ENV WEBSITE_URL="The website address you would like to check"
-ENV EMAIL_SENDER="the identity email that has permissions to send from the solution you use ( I used AWS SES) hint DKIM"
-ENV EMAIL_RECEIVER1="first email that receives notifications when the site changes"
-ENV EMAIL_RECEIVER2="second email that receives notifications when the site changes"
-ENV SMTP_PORT="587"
-ENV SMTP_USERNAME="SMTP-Username"
-ENV SMTP_PASSWORD="SMTP-Password"
-ENV TZ="America/Denver"
+# Runtime configuration comes from the environment (see docs/configuration.md).
+# Only non-secret defaults are baked in; never put SMTP credentials in the image.
+ENV TZ="America/Denver" \
+    ADMIN_PORT="8080" \
+    PYTHONUNBUFFERED="1"
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the necessary files into the container
+# tzdata only; no dist-upgrade so layers stay reproducible between builds.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
-COPY monitor.py .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Update system
-RUN apt update && apt dist-upgrade -y && apt install tzdata -y 
+COPY monitor.py admin_app.py runner_state.py settings_store.py settings_validation.py ./
+COPY static/ ./static/
 
-# upgrade pip
-RUN pip install --upgrade pip
+# Non-root runtime user. /data is the conventional mount for SETTINGS_FILE.
+RUN useradd --create-home --uid 10001 --shell /usr/sbin/nologin appuser \
+    && mkdir -p /data \
+    && chown appuser:appuser /data
+USER appuser
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 8080
 
-# Run the monitor script
+# Fails when the monitor loop stops iterating, not just when the web thread is up.
+HEALTHCHECK --interval=60s --timeout=5s --start-period=30s --retries=3 \
+    CMD python -c "import os,urllib.request,sys; urllib.request.urlopen('http://127.0.0.1:%s/healthz' % os.getenv('ADMIN_PORT','8080'), timeout=4); sys.exit(0)" || exit 1
+
 ENTRYPOINT ["python", "monitor.py"]

@@ -37,9 +37,20 @@ To build the container you only need one repository — the one you are reading.
 
 In case you want to integrate with [FluxCD](https://fluxcd.io/flux/installation/bootstrap/github/) you will need a repository to bootstrap FluxCD. Once bootstrapped you will need a kustomize file to synchronize the `site-checker` repository and the Kubernetes cluster.
 
+## Admin GUI
+
+The container serves a small web UI on port `8080` in the same dark instrument-panel style as the rest of the project:
+
+- **`/`** is the heartbeat of the monitor loop plus the recent checks, each expandable to HTTP status, response time, size, MD5, and errors.
+- **`/admin`** is the status board: last poll, last detected change, result of the last alert email, and live configuration. SMTP secrets are never rendered.
+- **`/admin/settings`** changes the monitored URLs and recipients without a rebuild. It is gated by `SITE_CHECKER_ADMIN_TOKEN`. Saves persist when `SETTINGS_FILE` points at a volume.
+- **`/healthz`** is a liveness endpoint that fails if the monitor loop stalls.
+
+The GUI has no user accounts, so keep it on a private network or behind an authenticating proxy. See [docs/configuration.md](docs/configuration.md#admin-gui).
+
 ## Configuration
 
-All runtime configuration is provided via environment variables. See [docs/configuration.md](docs/configuration.md) for the full reference.
+All runtime configuration is provided via environment variables, and the URLs and recipients can also be changed from the admin GUI. See [docs/configuration.md](docs/configuration.md) for the full reference.
 
 ## Deployment
 
@@ -47,7 +58,7 @@ Docker quickstart, Kubernetes manifest example, and notes for Fargate / Containe
 
 ## CI
 
-Continuous integration runs on every push and pull request via GitHub Actions — see [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The legacy GitLab pipeline in [`.gitlab-ci.yml`](.gitlab-ci.yml) is retained for GitLab-hosted mirrors.
+Continuous integration runs on every push and pull request via GitHub Actions — see [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It covers ruff (pinned), the pytest suite, and an image build that starts the container and probes the GUI. Run the same checks locally with `pip install -r requirements-dev.txt && ruff check . && python -m pytest`. The legacy GitLab pipeline in [`.gitlab-ci.yml`](.gitlab-ci.yml) is retained for GitLab-hosted mirrors.
 
 ## Contributing
 
